@@ -1,0 +1,181 @@
+---
+title: "Relatório Covid Sapiranga"
+author: "Augusto Albineli de Souza"
+output:
+  bookdown::gitbook:
+    split_by: chapter+number
+    config:
+     toc:
+       collapse: subsection
+       scroll_highlight: yes
+       before: null
+       after: null
+     toolbar:
+     edit : null
+     download: null
+     search: yes
+     fontsettings:
+       theme: white
+       family: sans
+       size: 1
+     sharing: no
+---
+
+
+```{r, include=FALSE}
+library(ggplot2)
+library(tidyverse)
+library(readxl)
+library(dplyr)
+library(plotly)
+COVID_SAP <- read_excel("COVID SAP.xlsx")
+```
+
+# Introdução
+
+O seguinte relatório trás os gráficos referentes aos números da COVID-19 na cidade de Sapiranga/RS, baseados nos boletins epidemiológicos diários disponibilizados pela secretaria de saúde do município. Os dados utilizados começam no dia 18/05/2020 e são atualizados diariamente até o seguinte momento.
+
+
+# Casos totais
+
+Até o dia atual, o município registrou o total de casos positivos:
+
+```{r, echo=FALSE}
+a=max(COVID_SAP$POSITIVOS)
+a 
+```
+
+Abaixo segue o gráfico dos casos positivos:
+```{r, echo=FALSE}
+w<-ggplot(COVID_SAP, aes(x=DIA, y=POSITIVOS))+geom_line(color="blue")
+ggplotly(w)
+```
+
+# Casos ativos
+
+No dia de hoje, o número de casos ativos é:
+```{r, echo=FALSE}
+ss=COVID_SAP$ATIVOSHJ
+ss[1]
+```
+
+Abaixo segue o gráfico dos casos ativos:
+```{r, echo=FALSE}
+ww<-ggplot(COVID_SAP, aes(x=DIA, y=ATIVOSC))+geom_line(color="blue")
+ggplotly(ww)
+```
+
+# Hospitalizados
+
+No dia de hoje, o número de sapiranguenses hospitalizados é:
+```{r, echo=FALSE}
+h=COVID_SAP$HOSPHJ
+h[1]
+```
+O número de sapiranguenses na UPA aguardando por leitos no hospital é:
+```{r, echo=FALSE}
+hR=COVID_SAP$UPAHJ
+hR[1]
+```
+
+Abaixo segue o gráfico dos hospitalizados(em azul) e dos pacientes da UPA que aguardam leito(em vermelho):
+```{r, echo=FALSE}
+g <- ggplot(COVID_SAP, aes(x=DIA))
+g <- g + geom_line(aes(y=HOSPITALIZADOS), colour="blue")
+g <- g + geom_line(aes(y=UPA), colour="red")
+ggplotly(g)
+```
+
+
+# Curados
+
+No dia de hoje, o número de sapiranguenses recuperados da doença é:
+```{r, echo=FALSE}
+h2=COVID_SAP$CURADOS
+max(h2)
+```
+
+Abaixo segue o gráfico dos hospitalizados:
+```{r, echo=FALSE}
+w3<-ggplot(COVID_SAP, aes(x=DIA, y=CURADOS))+geom_line(color="blue")
+ggplotly(w3)
+```
+
+# Óbitos
+
+No dia de hoje, o número total de obitos na cidade é:
+```{r, echo=FALSE}
+h23=COVID_SAP$OBITOS
+max(h23)
+```
+
+Abaixo segue o gráfico dos óbitos:
+```{r, echo=FALSE}
+w4<-ggplot(COVID_SAP, aes(x=DIA, y=OBITOS))+geom_line(color="blue")
+ggplotly(w4)
+```
+
+# Dados diários
+
+### Novos casos{-}
+
+O gráfico abaixo mostra o número de casos diários:
+```{r, echo=FALSE}
+ff<-ggplot(COVID_SAP, aes(DIA,NOVOSCASOS))+geom_bar(stat="identity")
+ggplotly(ff)
+```
+O maior número de casos novos registrados em um dia é:
+```{r, echo=FALSE}
+ed=max(COVID_SAP$NOVOSCASOS)
+ed
+```
+
+### Novos curados{-}
+
+O gráfico abaixo mostra o número de recuperados por dia:
+```{r, echo=FALSE}
+ffA<-ggplot(COVID_SAP, aes(DIA,NOVOSCURADOS))+geom_bar(stat="identity")
+ggplotly(ffA)
+```
+
+O maior número de recuperados em um dia é:
+```{r, echo=FALSE}
+ed1=max(COVID_SAP$NOVOSCURADOS)
+ed1
+```
+
+### Novos Casos x Novos Curados{-}
+
+```{r, echo=FALSE}
+gdw <- ggplot(COVID_SAP, aes(x=DIA))
+gdw <- gdw + geom_line(aes(y=NOVOSCASOS), colour="blue")
+gdw <- gdw + geom_line(aes(y=NOVOSCURADOS), colour="red")
+ggplotly(gdw)
+```
+
+
+### Novos hospitalizados{-}
+
+O gráfico abaixo mostra o número de habitantes hospitalizados por dia:
+```{r, echo=FALSE}
+sffA <-ggplot(COVID_SAP, aes(DIA,NOVOSHOSPITALIZADOS))+
+        geom_bar(stat='identity')
+ggplotly(sffA)
+```
+
+
+
+### Novos óbitos{-}
+
+O gráfico abaixo mostra o número de óbitos por dia:
+```{r, echo=FALSE}
+ssffA <-ggplot(COVID_SAP, aes(DIA,NOVOSOBITOS))+
+          geom_bar(stat="identity")
+ggplotly(ssffA)
+```
+
+O maior número de óbitos em um dia é:
+```{r, echo=FALSE}
+e1d=max(COVID_SAP$NOVOSOBITOS)
+e1d
+```
