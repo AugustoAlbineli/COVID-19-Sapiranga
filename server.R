@@ -60,22 +60,22 @@ server <- function(input, output) {
     ###POSITIVOS
     
     output$caixapositivos <- renderValueBox({
-        valueBox(max(df$POSITIVOS), "Casos positivos totais"
+        valueBox(max(df$POSITIVOS), "Casos positivos totais", color="teal"
         )
     })
     
     output$caixanpositivos <- renderValueBox({
-        valueBox(df$CASOSHJ[1], "Novos casos positivos",color="red"
+        valueBox(df$CASOSHJ[1], "Novos casos positivos",color="navy"
         )
     })
     
     output$caixamaxpositivos <- renderValueBox({
-        valueBox(max(df$NOVOSCASOS), "Maior número casos positivos em um dia",color="black"
+        valueBox(max(df$NOVOSCASOS), "Maior número casos positivos em um dia",color="light-blue"
         )
     })
     
     output$caixadia <- renderValueBox({
-        valueBox(df$DIAHJ[1], "Dia",color="orange"
+        valueBox(df$DIAHJ[1], "Dia",color="blue"
         )
     })
     
@@ -83,17 +83,17 @@ server <- function(input, output) {
     
     
     output$caixamaxativos <- renderValueBox({
-        valueBox(max(df$ATIVOSC), "Máximo de casos ativos",color="black"
+        valueBox(max(df$ATIVOSC), "Máximo de casos ativos",color="light-blue"
         )
     })
     
     output$caixanativos <- renderValueBox({
-        valueBox(df$ATIVOSHJ[1], "Casos ativos hoje"
+        valueBox(df$ATIVOSHJ[1], "Casos ativos hoje", color="teal"
         )
     })
     
     output$caixa2dia <- renderValueBox({
-        valueBox(df$DIAHJ[1], "Dia",color="orange"
+        valueBox(df$DIAHJ[1], "Dia",color="blue"
         )
     })
    
@@ -102,22 +102,22 @@ server <- function(input, output) {
     
    
     output$caixahospital <- renderValueBox({
-        valueBox(df$HOSPHJ[1], "Hospitalizados hoje"
+        valueBox(df$HOSPHJ[1], "Hospitalizados hoje", color="teal"
         )
     })
     
     output$caixamaxhospital <- renderValueBox({
-        valueBox(max(df$HOSPITALIZADOS), "Maior número de hospitalizados",color="black"
+        valueBox(max(df$HOSPITALIZADOS), "Maior número de hospitalizados",color="light-blue"
         )
     })
     
     output$caixanhospital <- renderValueBox({
-        valueBox(df$NOVOHOSPHJ[1], "Diferença pro dia de ontem", color="red"
+        valueBox(df$NOVOHOSPHJ[1], "Diferença pro dia de ontem", color="navy"
         )
     })
     
     output$caixa3dia <- renderValueBox({
-        valueBox(df$DIAHJ[1], "Dia",color="orange"
+        valueBox(df$DIAHJ[1], "Dia",color="blue"
         )
     })
     
@@ -125,22 +125,22 @@ server <- function(input, output) {
     ###ÓBITOS
     
     output$caixaobitos <- renderValueBox({
-        valueBox(max(df$OBITOS), "Óbitos"
+        valueBox(max(df$OBITOS), "Óbitos", color="teal"
         )
     })
     
     output$caixamaxobitos <- renderValueBox({
-        valueBox(max(df$NOVOSOBITOS), "Maior número de óbitos em um dia",color="black"
+        valueBox(max(df$NOVOSOBITOS), "Maior número de óbitos em um dia",color="light-blue"
         )
     })
     
     output$caixanobitos <- renderValueBox({
-        valueBox(df$OBITOSHJ[1], "Óbitos no dia de hoje", color="red"
+        valueBox(df$OBITOSHJ[1], "Óbitos no dia de hoje", color="navy"
         )
     })
     
     output$caixa4dia <- renderValueBox({
-        valueBox(df$DIAHJ[1], "Dia",color="orange"
+        valueBox(df$DIAHJ[1], "Dia",color="blue"
         )
     })
     
@@ -148,22 +148,22 @@ server <- function(input, output) {
     
     
     output$caixacurados <- renderValueBox({
-        valueBox(max(df$CURADOS), "Curados"
+        valueBox(max(df$CURADOS), "Curados", color="teal"
         )
     })
     
     output$caixamaxcurados <- renderValueBox({
-        valueBox(max(df$NOVOSCURADOS), "Maior número de curados em um dia",color="black"
+        valueBox(max(df$NOVOSCURADOS), "Maior número de curados em um dia",color="light-blue"
         )
     })
     
     output$caixancurados <- renderValueBox({
-        valueBox(df$CURADOSHJ[1], "Curados no dia de hoje", color="red"
+        valueBox(df$CURADOSHJ[1], "Curados no dia de hoje", color="navy"
         )
     })
     
     output$caixa5dia <- renderValueBox({
-        valueBox(df$DIAHJ[1], "Dia",color="orange"
+        valueBox(df$DIAHJ[1], "Dia",color="blue"
         )
     })
 }#server
