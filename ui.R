@@ -2,19 +2,31 @@ library(shiny)
 library(shinydashboard)
 library(ggplot2)
 library(plotly)
+library(shinyEffects)
 source("data.R")
 
 ui <- dashboardPage(
     
-    dashboardHeader(title = "COVID-19 Sapiranga"),
+    dashboardHeader(title = "COVID-19 Sapiranga",
+                    dropdownMenu(type = "notifications", # para colocar os nomes de quem fez o app  
+                                 notificationItem(
+                                     text = tags$div("Augusto Albineli de Souza",
+                                                     style = "display: inline-block; vertical-align: middle;"),
+                                     icon = icon("id-card"),
+                                     status = "success"
+                                 ), #notificationItem
+                                 headerText = "Desenvolvido por"
+                                 
+                                ) #dropdownMenu  
+                    ), #dashboardHeader
     
     dashboardSidebar(
         sidebarMenu(
-            menuItem("Positivos", tabName = "positivos", icon = icon("chart-bar")),
-            menuItem("Ativos", tabName = "ativos", icon = icon("chart-bar")),
-            menuItem("Hospitalizados", tabName = "hospital", icon = icon("chart-bar")),
-            menuItem("Óbitos", tabName = "obitos", icon = icon("chart-bar")),
-            menuItem("Curados", tabName = "curados", icon = icon("chart-bar"))
+            menuItem("Positivos", tabName = "positivos", icon = icon("plus-square")),
+            menuItem("Ativos", tabName = "ativos", icon = icon("exclamation-triangle")),
+            menuItem("Hospitalizados", tabName = "hospital", icon = icon("clinic-medical")),
+            menuItem("Óbitos", tabName = "obitos", icon = icon("exclamation-circle")),
+            menuItem("Curados", tabName = "curados", icon = icon("check"))
             
         ) #sidebarMenu
     ), #dashboardSidebar
@@ -22,10 +34,16 @@ ui <- dashboardPage(
     dashboardBody(
         tabItems(
             tabItem(tabName = "positivos",
+                    
+                    setZoom(id = "caixadia"),
+                    setZoom(id = "caixapositivos"),
+                    setZoom(id = "caixanpositivos"),
+                    setZoom(id = "caixamaxpositivos"),
+                    
                     fluidRow(
                         valueBoxOutput(width = 3, outputId = "caixadia"),
                         valueBoxOutput(width = 2, outputId = "caixapositivos"),
-                        valueBoxOutput(width = 2, outputId = "caixanpositivos"),
+                        valueBoxOutput(width = 3, outputId = "caixanpositivos"),
                         valueBoxOutput(width = 4, outputId = "caixamaxpositivos")
                         
                     ),#fluidRow1
@@ -40,9 +58,14 @@ ui <- dashboardPage(
             ), #tabItem_positivos
             
             tabItem(tabName = "ativos",
+                    
+                    setZoom(id = "caixa2dia"),
+                    setZoom(id = "caixanativos"),
+                    setZoom(id = "caixamaxativos"),
+                    
                     fluidRow(
-                        valueBoxOutput(width = 3, outputId = "caixa2dia"),
-                        valueBoxOutput(width = 2, outputId = "caixanativos"),
+                        valueBoxOutput(width = 4, outputId = "caixa2dia"),
+                        valueBoxOutput(width = 4, outputId = "caixanativos"),
                         valueBoxOutput(width = 4, outputId = "caixamaxativos")
                         
                     ),#fluidRow1
@@ -55,11 +78,17 @@ ui <- dashboardPage(
             ), #tabItem_ativos
             
             tabItem(tabName = "hospital",
+                    
+                    setZoom(id = "caixa3dia"),
+                    setZoom(id = "caixahospital"),
+                    setZoom(id = "caixanhospital"),
+                    setZoom(id = "caixamaxhospital"),
+                    
                     fluidRow(
                         valueBoxOutput(width = 3, outputId = "caixa3dia"),
-                        valueBoxOutput(width = 2, outputId = "caixahospital"),
-                        valueBoxOutput(width = 2, outputId = "caixanhospital"),
-                        valueBoxOutput(width = 2, outputId = "caixamaxhospital")
+                        valueBoxOutput(width = 3, outputId = "caixahospital"),
+                        valueBoxOutput(width = 3, outputId = "caixanhospital"),
+                        valueBoxOutput(width = 3, outputId = "caixamaxhospital")
                         
                     ),#fluidRow1
                     
@@ -72,11 +101,17 @@ ui <- dashboardPage(
             ), #tabItem_hospital
             
             tabItem(tabName = "obitos",
+                    
+                    setZoom(id = "caixa4dia"),
+                    setZoom(id = "caixaobitos"),
+                    setZoom(id = "caixanobitos"),
+                    setZoom(id = "caixamaxobitos"),
+                    
                     fluidRow(
                         valueBoxOutput(width = 3, outputId = "caixa4dia"),
-                        valueBoxOutput(width = 2, outputId = "caixaobitos"),
-                        valueBoxOutput(width = 2, outputId = "caixanobitos"),
-                        valueBoxOutput(width = 2, outputId = "caixamaxobitos")
+                        valueBoxOutput(width = 3, outputId = "caixaobitos"),
+                        valueBoxOutput(width = 3, outputId = "caixanobitos"),
+                        valueBoxOutput(width = 3, outputId = "caixamaxobitos")
                         
                     ),#fluidRow1
                     
@@ -89,11 +124,17 @@ ui <- dashboardPage(
             ), #tabItem_obitos
             
             tabItem(tabName = "curados",
+                    
+                    setZoom(id = "caixa5dia"),
+                    setZoom(id = "caixacurados"),
+                    setZoom(id = "caixancurados"),
+                    setZoom(id = "caixamaxcurados"),
+                    
                     fluidRow(
                         valueBoxOutput(width = 3, outputId = "caixa5dia"),
-                        valueBoxOutput(width = 2, outputId = "caixacurados"),
-                        valueBoxOutput(width = 2, outputId = "caixancurados"),
-                        valueBoxOutput(width = 2, outputId = "caixamaxcurados")
+                        valueBoxOutput(width = 3, outputId = "caixacurados"),
+                        valueBoxOutput(width = 3, outputId = "caixancurados"),
+                        valueBoxOutput(width = 3, outputId = "caixamaxcurados")
                         
                     ),#fluidRow1
                     
