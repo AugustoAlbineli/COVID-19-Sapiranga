@@ -5,7 +5,8 @@ source("data.R")
 
 
 server <- function(input, output) {
-    
+    count=NROW(df$DIA)
+    count
     ## LINES
     output$positivos <- renderPlotly({
         plot <- plot.line(df, "DIA", "POSITIVOS" , "DIA", "POSITIVOS","Casos Positivos")
@@ -19,6 +20,11 @@ server <- function(input, output) {
     
     output$hospital <- renderPlotly({
         plot <- plot.line(df, "DIA", "HOSPITALIZADOS" , "DIA", "HOSPITALIZADOS","Hospitalizados")
+        ggplotly(plot)
+    })
+    
+    output$upa <- renderPlotly({
+        plot <- plot.line(df, "DIA", "UPA" , "DIA", "UPA","UPA")
         ggplotly(plot)
     })
     
@@ -45,6 +51,11 @@ server <- function(input, output) {
         ggplotly(plot)
     })
     
+    output$nupa <- renderPlotly({
+        plot <- plot.bar(df, "DIA", "NOVOUPA" , "DIA", "NOVOUPA","UPA")
+        ggplotly(plot)
+    })
+    
     output$nobitos <- renderPlotly({
         plot <- plot.bar(df, "DIA", "NOVOSOBITOS" , "DIA", "NOVOSÓBITOS","Óbitos")
         ggplotly(plot)
@@ -65,7 +76,7 @@ server <- function(input, output) {
     })
     
     output$caixanpositivos <- renderValueBox({
-        valueBox(df$CASOSHJ[1], "Novos casos positivos",color="navy"
+        valueBox(df$NOVOSCASOS[count], "Novos casos positivos",color="navy"
         )
     })
     
@@ -75,7 +86,7 @@ server <- function(input, output) {
     })
     
     output$caixadia <- renderValueBox({
-        valueBox(df$DIAHJ[1], "Dia",color="blue"
+        valueBox(df$DIA[count], "Dia",color="blue"
         )
     })
     
@@ -88,12 +99,12 @@ server <- function(input, output) {
     })
     
     output$caixanativos <- renderValueBox({
-        valueBox(df$ATIVOSHJ[1], "Casos ativos hoje", color="teal"
+        valueBox(df$ATIVOSC[count], "Casos ativos hoje", color="teal"
         )
     })
     
     output$caixa2dia <- renderValueBox({
-        valueBox(df$DIAHJ[1], "Dia",color="blue"
+        valueBox(df$DIA[count], "Dia",color="blue"
         )
     })
    
@@ -102,7 +113,7 @@ server <- function(input, output) {
     
    
     output$caixahospital <- renderValueBox({
-        valueBox(df$HOSPHJ[1], "Hospitalizados hoje", color="teal"
+        valueBox(df$HOSPITALIZADOS[count], "Hospitalizados hoje", color="teal"
         )
     })
     
@@ -112,15 +123,39 @@ server <- function(input, output) {
     })
     
     output$caixanhospital <- renderValueBox({
-        valueBox(df$NOVOHOSPHJ[1], "Diferença pro dia de ontem", color="navy"
+        valueBox(df$NOVOSHOSPITALIZADOS[count], "Diferença pro dia de ontem", color="navy"
         )
     })
     
     output$caixa3dia <- renderValueBox({
-        valueBox(df$DIAHJ[1], "Dia",color="blue"
+        valueBox(df$DIA[count], "Dia",color="blue"
         )
     })
     
+    
+    ###UPA
+    
+    
+    
+    output$caixaupa <- renderValueBox({
+        valueBox(df$UPA[count], "Pacientes na UPA", color="teal"
+        )
+    })
+    
+    output$caixamaxupa <- renderValueBox({
+        valueBox(max(df$UPA), "Maior número de pacientes na UPA",color="light-blue"
+        )
+    })
+    
+    output$caixanupa <- renderValueBox({
+        valueBox(df$NOVOUPA[count], "Diferença pro dia de ontem", color="navy"
+        )
+    })
+    
+    output$caixa8dia <- renderValueBox({
+        valueBox(df$DIA[count], "Dia",color="blue"
+        )
+    })
     
     ###ÓBITOS
     
@@ -135,12 +170,12 @@ server <- function(input, output) {
     })
     
     output$caixanobitos <- renderValueBox({
-        valueBox(df$OBITOSHJ[1], "Óbitos no dia de hoje", color="navy"
+        valueBox(df$NOVOSOBITOS[count], "Óbitos no dia de hoje", color="navy"
         )
     })
     
     output$caixa4dia <- renderValueBox({
-        valueBox(df$DIAHJ[1], "Dia",color="blue"
+        valueBox(df$DIA[count], "Dia",color="blue"
         )
     })
     
@@ -158,12 +193,66 @@ server <- function(input, output) {
     })
     
     output$caixancurados <- renderValueBox({
-        valueBox(df$CURADOSHJ[1], "Curados no dia de hoje", color="navy"
+        valueBox(df$NOVOSCURADOS[count], "Curados no dia de hoje", color="navy"
         )
     })
     
     output$caixa5dia <- renderValueBox({
-        valueBox(df$DIAHJ[1], "Dia",color="blue"
+        valueBox(df$DIA[count], "Dia",color="blue"
         )
     })
+    
+    
+    #### DADOS GERAIS
+    
+    output$caixa9dia <- renderValueBox({
+        infoBox("Dia",df2$DIA[cte], color="blue", icon=icon("calendar-week")
+        )
+    })
+    
+    output$caixamonitorados <- renderValueBox({
+        infoBox("Casos Monitorados", df2$MONITORADOS[cte],color="navy", icon=icon("eye")
+        )
+    })
+    
+    output$caixatestes <- renderValueBox({
+        infoBox("Testes realizados", df2$TESTESREALIZADOS[cte],color="blue", icon=icon("vial")
+        )
+    })
+    
+    output$caixaaguardo <- renderValueBox({
+        infoBox("Aguardando resultado", df2$AGUARDANDORESULTADO[cte],color="navy", icon=icon("spinner")
+        )
+    })
+    
+    output$caixaconfirmados <- renderValueBox({
+        infoBox("Casos locais confirmados", df2$CONFIRMADOS[cte],color="blue", icon=icon("exclamation-triangle")
+        )
+    })
+    
+    output$caixanegativos <- renderValueBox({
+        infoBox("Casos negativados", df2$NEGATIVOS[cte],color="navy", icon=icon("minus-circle")
+        )
+    })
+    
+    output$caixahospitalizados <- renderValueBox({
+        infoBox("Sapiranguenses hospitalizados", df2$HOSPITAL[cte],color="blue", icon=icon("clinic-medical")
+        )
+    })
+    
+    output$caixapacienteupa <- renderValueBox({
+        infoBox("Pacientes internados na UPA", df2$UPA[cte],color="navy", icon=icon("ambulance")
+        )
+    })
+    
+    output$caixarecuperados <- renderValueBox({
+        infoBox("Curados", df2$CURADOS[cte],color="blue", icon=icon("check")
+        )
+    })
+    
+    output$caixaobito <- renderValueBox({
+        infoBox("Óbitos", df2$OBITOS[cte],color="navy", icon=icon("exclamation-circle")
+        )
+    })
+    
 }#server
