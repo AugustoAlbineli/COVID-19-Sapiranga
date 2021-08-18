@@ -5,64 +5,74 @@ source("data.R")
 
 
 server <- function(input, output) {
-    count=NROW(df$DIA)
-    count
+    
     ## LINES
     output$positivos <- renderPlotly({
-        plot <- plot.line(df, "DIA", "POSITIVOS" , "DIA", "POSITIVOS","Casos Positivos")
+        plot <- plot.line(df, "DIA", "POSITIVOS")+
+            labs(x="Dia", y="Casos positivos")
         ggplotly(plot)
     })    
     
     output$ativos <- renderPlotly({
-        plot <- plot.line(df, "DIA", "ATIVOSC" , "DIA", "ATIVOS","Casos Ativos")
+        plot <- plot.line(df, "DIA", "ATIVOSC")+
+            labs(x="Dia", y="Casos ativos")
         ggplotly(plot)
     })
     
     output$hospital <- renderPlotly({
-        plot <- plot.line(df, "DIA", "HOSPITALIZADOS" , "DIA", "HOSPITALIZADOS","Hospitalizados")
+        plot <- plot.line(df, "DIA", "HOSPITALIZADOS")+
+            labs(x="Dia", y="Sapiranguenses internados em hospitais")
         ggplotly(plot)
     })
     
     output$upa <- renderPlotly({
-        plot <- plot.line(df, "DIA", "UPA" , "DIA", "UPA","UPA")
+        plot <- plot.line(df, "DIA", "UPA")+
+        labs(x="Dia", y="Sapiranguenses internados na UPA")
         ggplotly(plot)
     })
     
     output$obitos <- renderPlotly({
-        plot <- plot.line(df, "DIA", "OBITOS" , "DIA", "ÓBITOS","Óbitos")
+        plot <- plot.line(df, "DIA", "OBITOS")+
+            labs(x="Dia", y="Óbitos totais")
         ggplotly(plot)
     })  
     
     output$curados <- renderPlotly({
-        plot <- plot.line(df, "DIA", "CURADOS" , "DIA", "CURADOS","Curados")
+        plot <- plot.line(df, "DIA", "CURADOS")+
+            labs(x="Dia", y="Curados totais")
         ggplotly(plot)
     })  
     
     ## Barras
     
     output$npositivos <- renderPlotly({
-        plot <- plot.bar(df, "DIA", "NOVOSCASOS" , "DIA", "NOVOSCASOS","Novos casos")
+        plot <- plot.bar(df, "DIA", "NOVOSCASOS")+
+            labs(x="Dia", y="Novos casos por dia")
         ggplotly(plot)
     })    
     
     
     output$nhospital <- renderPlotly({
-        plot <- plot.bar(df, "DIA", "NOVOSHOSPITALIZADOS" , "DIA", "NOVOSHOSPITALIZADOS","Hospitalizados")
+        plot <- plot.bar(df, "DIA", "NOVOSHOSPITALIZADOS")+
+            labs(x="Dia", y="Novos hospitalizados por dia")
         ggplotly(plot)
     })
     
     output$nupa <- renderPlotly({
-        plot <- plot.bar(df, "DIA", "NOVOUPA" , "DIA", "NOVOUPA","UPA")
+        plot <- plot.bar(df, "DIA", "NOVOUPA")+
+            labs(x="Dia", y="Novos internados na UPA por dia")
         ggplotly(plot)
     })
     
     output$nobitos <- renderPlotly({
-        plot <- plot.bar(df, "DIA", "NOVOSOBITOS" , "DIA", "NOVOSÓBITOS","Óbitos")
+        plot <- plot.bar(df, "DIA", "NOVOSOBITOS")+
+            labs(x="Dia", y="Novos óbitos por dia")
         ggplotly(plot)
     })  
     
     output$ncurados <- renderPlotly({
-        plot <- plot.bar(df, "DIA", "NOVOSCURADOS" , "DIA", "NOVOSCURADOS","Curados")
+        plot <- plot.bar(df, "DIA", "NOVOSCURADOS")+
+            labs(x="Dia", y="Novos curados por dia")
         ggplotly(plot)
     })  
     
@@ -81,12 +91,12 @@ server <- function(input, output) {
     })
     
     output$caixamaxpositivos <- renderValueBox({
-        valueBox(max(df$NOVOSCASOS), "Maior número casos positivos em um dia",color="light-blue"
+        valueBox(max(df$NOVOSCASOS), "Maior número de casos positivos em um dia",color="light-blue"
         )
     })
     
     output$caixadia <- renderValueBox({
-        valueBox(df$DIA[count], "Dia",color="blue"
+        valueBox(df$DIAS[count], "Dia",color="blue"
         )
     })
     
@@ -104,7 +114,7 @@ server <- function(input, output) {
     })
     
     output$caixa2dia <- renderValueBox({
-        valueBox(df$DIA[count], "Dia",color="blue"
+        valueBox(df$DIAS[count], "Dia",color="blue"
         )
     })
    
@@ -128,7 +138,7 @@ server <- function(input, output) {
     })
     
     output$caixa3dia <- renderValueBox({
-        valueBox(df$DIA[count], "Dia",color="blue"
+        valueBox(df$DIAS[count], "Dia",color="blue"
         )
     })
     
@@ -153,7 +163,7 @@ server <- function(input, output) {
     })
     
     output$caixa8dia <- renderValueBox({
-        valueBox(df$DIA[count], "Dia",color="blue"
+        valueBox(df$DIAS[count], "Dia",color="blue"
         )
     })
     
@@ -175,7 +185,7 @@ server <- function(input, output) {
     })
     
     output$caixa4dia <- renderValueBox({
-        valueBox(df$DIA[count], "Dia",color="blue"
+        valueBox(df$DIAS[count], "Dia",color="blue"
         )
     })
     
@@ -198,7 +208,7 @@ server <- function(input, output) {
     })
     
     output$caixa5dia <- renderValueBox({
-        valueBox(df$DIA[count], "Dia",color="blue"
+        valueBox(df$DIAS[count], "Dia",color="blue"
         )
     })
     
@@ -206,7 +216,7 @@ server <- function(input, output) {
     #### DADOS GERAIS
     
     output$caixa9dia <- renderValueBox({
-        infoBox("Dia",df2$DIA[cte], color="blue", icon=icon("calendar-week")
+        infoBox("Dia",df2$DIAS[cte], color="blue", icon=icon("calendar-week")
         )
     })
     
