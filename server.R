@@ -25,6 +25,12 @@ server <- function(input, output) {
         ggplotly(plot)
     })
     
+    output$inc_hospital <- renderPlotly({
+        plot <- plot.line(df, "DIA", "inc_hosp")+
+            labs(x="Dia", y="Incidência de hospitalizações")
+        ggplotly(plot)
+    })
+    
     output$upa <- renderPlotly({
         plot <- plot.line(df, "DIA", "UPA")+
         labs(x="Dia", y="Sapiranguenses internados na UPA")
@@ -36,6 +42,12 @@ server <- function(input, output) {
             labs(x="Dia", y="Óbitos totais")
         ggplotly(plot)
     })  
+    
+    output$inc_obitos <- renderPlotly({
+        plot <- plot.line(df, "DIA", "inc_obito")+
+            labs(x="Dia", y="Incidência de óbitos")
+        ggplotly(plot)
+    })
     
     output$curados <- renderPlotly({
         plot <- plot.line(df, "DIA", "CURADOS")+
@@ -264,5 +276,6 @@ server <- function(input, output) {
         infoBox("Óbitos", df2$OBITOS[cte],color="navy", icon=icon("exclamation-circle")
         )
     })
+    
     
 }#server

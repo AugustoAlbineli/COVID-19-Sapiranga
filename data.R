@@ -27,3 +27,5 @@ cte
 df$DIAS=format(df$DIA, "%d/%b/%Y")
 df2$DIAS=format(df2$DIA, "%d/%b/%Y")
 
+df$inc_hosp= (df$HOSPITALIZADOS/df$ATIVOSC)*100
+df$inc_obito= (df$NOVOSOBITOS/df$ATIVOSC)*100

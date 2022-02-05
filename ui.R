@@ -103,7 +103,14 @@ ui <- dashboardPage(
                             plotlyOutput(outputId = "hospital")),
                         box(background = "black", title = "Hospitalizados por dia",
                             plotlyOutput(outputId = "nhospital"))
-                    )#fluidRow2
+                    ),#fluidRow2
+                    
+                    fluidRow(width=12,
+                        box(background = "black", title = "Incidência de hospitalizações",
+                            plotlyOutput(outputId = "inc_hospital"),width=400)
+                    )#fluidRow3
+                    
+                    
             ), #tabItem_hospital
             
             tabItem(tabName = "obitos",
@@ -126,7 +133,15 @@ ui <- dashboardPage(
                             plotlyOutput(outputId = "obitos")),
                         box(background = "black", title = "Óbitos por dia",
                             plotlyOutput(outputId = "nobitos"))
-                    )#fluidRow2
+                    ),#fluidRow2
+                    
+                    
+                    fluidRow(width=12,
+                             box(background = "black", title = "Incidência de óbitos",
+                                 plotlyOutput(outputId = "inc_obitos"),width=400)
+                    )#fluidRow3
+                    
+                    
             ), #tabItem_obitos
             
             tabItem(tabName = "curados",
